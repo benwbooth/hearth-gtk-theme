@@ -37,6 +37,28 @@ writes `Hearth` and `Hearth-dark`; `package.nix` shows the call. The palette
 is at the top of the file (from hearth's `shell/Theme.qml` and
 `shared/app-menus/MacMenuStyle.qml`).
 
+## Flatpak apps
+
+Flatpak apps can't see the host's themes. Two pieces cover them:
+
+- **GTK 3**: `flatpak/build.sh` builds `org.gtk.Gtk3theme.Hearth` and
+  `org.gtk.Gtk3theme.Hearth-dark` (branch 3.22) from the Nix package with
+  org.flatpak.Builder and installs them for the user. The runtimes mount
+  them at `share/runtime/share/themes/<Name>/gtk-3.0`, and GTK picks the one
+  the host names (gtk-theme, through the settings portal). Accent variants
+  live in `~/.themes` (hearth-color-scheme writes them there) and import
+  Hearth from the extension's path, so a Flatpak also needs
+  `flatpak override --user --filesystem=~/.themes:ro`.
+- **libadwaita / GTK 4**: no theme extensions; they read
+  `~/.config/gtk-4.0/gtk.css` once given
+  `flatpak override --user --filesystem=xdg-config/gtk-4.0:ro`
+  (Flatpak maps it into the app's own config dir).
+
+```sh
+flatpak/build.sh                      # build + install both extensions
+flatpak override --user --filesystem=xdg-config/gtk-4.0:ro --filesystem=~/.themes:ro
+```
+
 ## Licence
 
 LGPL-2.1-or-later, as the stylesheets it builds on (adw-gtk3, libadwaita,

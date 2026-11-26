@@ -1,0 +1,20 @@
+# Hearth for GTK 3 Flatpak apps: the runtimes (freedesktop, GNOME) mount
+# org.gtk.Gtk3theme.<Name> extensions at share/runtime/share/themes/<Name>/gtk-3.0
+# and GTK uses the one the host names (gtk-theme, through the settings portal).
+# Built by flatpak/build.sh from the Nix package's share/themes (THEMES).
+id: org.gtk.Gtk3theme.Hearth
+branch: '3.22'
+runtime: org.freedesktop.Sdk
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+build-extension: true
+separate-locales: false
+appstream-compose: false
+modules:
+  - name: theme
+    buildsystem: simple
+    build-commands:
+      - cp -r gtk-3.0/. "$FLATPAK_DEST/"
+    sources:
+      - type: dir
+        path: themes/Hearth

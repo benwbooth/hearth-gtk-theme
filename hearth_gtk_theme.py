@@ -304,15 +304,16 @@ window.popup decoration, .csd.popup decoration {{
 }}
 menu, .menu, .context-menu {{
   background-color: @hearth_menu_solid; color: @hearth_menu_fg; border-radius: 14px; border: none; padding: 5px;
+  min-width: 192px;
   box-shadow: inset 0 0 0 1px @hearth_menu_rim;
   font-family: {FONT}; font-size: {MENU_FONT_PX}; letter-spacing: -0.09px;
 }}
 menu menuitem, .menu menuitem, .context-menu menuitem {{
-  min-height: 27px; min-width: 193px; padding: 0 11px; border-radius: 9px; color: @hearth_menu_fg; text-shadow: none;
+  min-height: 27px; padding: 0 11px; border-radius: 9px; color: @hearth_menu_fg; text-shadow: none;
 }}
 menu menuitem:hover, .menu menuitem:hover, .context-menu menuitem:hover {{ background-color: @accent_bg_color; color: #ffffff; }}
 menu menuitem:disabled, .menu menuitem:disabled {{ color: @hearth_menu_disabled; }}
-menu menuitem accelerator {{ color: @hearth_menu_dim; letter-spacing: 0.6px; }}
+menu menuitem accelerator {{ color: @hearth_menu_dim; letter-spacing: 0.6px; margin-left: 28px; }}
 menu menuitem:hover accelerator {{ color: @hearth_menu_dim_hover; }}
 menu menuitem arrow {{ min-width: 12px; min-height: 12px; color: @hearth_menu_dim; }}
 menu menuitem:hover arrow {{ color: #ffffff; }}
